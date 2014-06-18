@@ -3,6 +3,7 @@
   "description": "A simple chat app with node.js used for learning purposes",
   "author": "Alejandro Schmechel <alejandro.schmechel@gmail.com>",
   "dependencies": {
+  	"http" : "*",
     "colors": ">= 0.6.2",
     "express": "4.4.3",
     "socket.io": "1.0.5",
