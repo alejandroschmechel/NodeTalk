@@ -1,6 +1,86 @@
-<script src="https://cdn.socket.io/socket.io-1.0.4.js"></script>
-<script>
-	var server = io.connect('http://localhost:8080');
-</script>
+<!doctype html>
 
-<h1>Soon to be a chat...</h1>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Node Talk</title>
+  <meta name="description" content="A Simple Chat With Node">
+  <meta name="author" content="Alejandro Schmechel">
+
+  <link rel="stylesheet" href="./css/bootstrap.css">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/bootstrap-responsive.css">
+  <link href='http://fonts.googleapis.com/css?family=Ubuntu+Condensed' rel='stylesheet' type='text/css'>
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+
+<body>
+	<div id="wrap">
+
+      <!-- Begin page content -->
+      <div class="container">
+        <div class="page-header">
+          <h1>Node Talk</h1>
+        </div>
+        <p>Connected as: <span id="connected_user"></span><p>
+        <p class="lead">Talk with your friends with Node.js</p>
+        <div class="bs-example">
+		    <form id="message-form" method="POST" action="javascript:;" role="form" role="form">
+		    	<label for="message">Message:</label>
+				<input id="message" type="text" class="form-control" placeholder="Enter your message here!" style="width:800px;"><button type="button" class="btn btn-success" id="send-button" style="margin-top: -10px; margin-left: 5px;">Send</button>
+
+		    </form>
+	  	</div>
+        <div id="messages" style="background-color: #000; width: 100%; height:600px; font-family: 'Ubuntu Condensed', sans-serif; color: green; overflow: scroll">
+        	<p class="sent-message none">
+        		No messages sent yet...
+        	</p>
+        </div>
+      </div>
+      <div id="push"></div>
+    </div>
+    <br/>
+    <div id="footer">
+      <div class="container">
+        <p class="muted credit">Node Talk - 2014 Alejandro Schmechel</p>
+      </div>
+    </div>
+    <script src="./js/boostrap.js"></script>
+
+    <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script src="https://cdn.socket.io/socket.io-1.0.4.js"></script>
+	<script>
+		var server = io('http://192.168.0.100:8080');
+
+		$("#send-button").on('click', function(e){
+			$("#message-form").submit();
+		});
+
+		$("#message-form").on('submit', function(e){
+			var message = $('#message').val();
+			server.emit('message', message);
+			$('#message').val('');
+		});
+
+		server.on('connect', function(data){
+			var connectedUser = prompt("Question: What's your beautiful name?");
+			$("#connected_user").html('<b>'+connectedUser+'</b>');
+			server.emit('join', connectedUser);
+		});
+
+		server.on('newmessage', function(data) { 
+			insertMessage(data); 
+		});
+
+		function insertMessage(message){
+			$(".none").fadeOut(function(){
+				$("#messages").prepend("<p class='sent-message last'>"+message+"</p>");
+			});	
+		}
+	</script>
+</body>
+</html>
