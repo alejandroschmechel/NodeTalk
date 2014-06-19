@@ -53,8 +53,9 @@
 
     <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
 	<script src="https://cdn.socket.io/socket.io-1.0.4.js"></script>
+	<script src="./js/config.js"></script>
 	<script>
-		var server = io('http://192.168.0.100:8080');
+		var server = io(config.host);
 
 		$("#send-button").on('click', function(e){
 			$("#message-form").submit();
