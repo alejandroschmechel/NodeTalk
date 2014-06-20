@@ -19,7 +19,7 @@ io.sockets.on("connection", function(client){
 	var messageDb = {"nickname" : nickname, "message": data, "time": hour+":"+min, "date": date};
 	db.messages.save(messageDb, function(err, saved) {
 	  if( !err && saved){
-	    console.log("nem message saved in database");
+	    console.log("new message saved in database");
 	  }
 	});
 	console.log("["+hour+":"+min+"] ".yellow + nickname.blue + " Wrote: ".yellow + data.grey);
