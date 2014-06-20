@@ -56,3 +56,11 @@ code {
   margin-left: 15px;
   margin-top: 15px;
 }
+
+.old{
+  color: grey;
+}
+
+.last{
+  color: #FF3300;
+}

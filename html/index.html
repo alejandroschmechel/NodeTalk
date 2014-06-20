@@ -54,34 +54,6 @@
     <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
 	<script src="https://cdn.socket.io/socket.io-1.0.4.js"></script>
 	<script src="./js/config.js"></script>
-	<script>
-		var server = io(config.host);
-
-		$("#send-button").on('click', function(e){
-			$("#message-form").submit();
-		});
-
-		$("#message-form").on('submit', function(e){
-			var message = $('#message').val();
-			server.emit('message', message);
-			$('#message').val('');
-		});
-
-		server.on('connect', function(data){
-			var connectedUser = prompt("Question: What's your beautiful name?");
-			$("#connected_user").html('<b>'+connectedUser+'</b>');
-			server.emit('join', connectedUser);
-		});
-
-		server.on('newmessage', function(data) { 
-			insertMessage(data); 
-		});
-
-		function insertMessage(message){
-			$(".none").fadeOut(function(){
-				$("#messages").prepend("<p class='sent-message last'>"+message+"</p>");
-			});	
-		}
-	</script>
+	<script src="./js/server-handler.js"></script>
 </body>
 </html>
