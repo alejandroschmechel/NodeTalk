@@ -35,16 +35,16 @@ function prependOldMessages(messages){
   $(".none").fadeOut(function(){
     messages.forEach(function(message){
       var showDate = "";
-      //if(message.date !== 'undefined' && !is_today(message.date)){ showDate = "On "+message.date.getMonth()+" "+message.date.getDay()+" "; }
+      console.log(message.date);
+      if(message.date !== undefined && !is_today(message.date)){ var cdate = new Date(message.date); showDate = "On "+cdate.getMonth()+"/"+cdate.getDay()+" "; }
       $("#messages").prepend("<p class='sent-message old'>"+showDate+"["+message.time+"] "+message.nickname+" wrote: "+message.message+"</p>");
     });
   }); 
 }
 
 function is_today(td){
-	if(td !== 'undefined'){
-		var d = new Date();
-		return td.getDate() == d.getDate() && td.getMonth() == d.getMonth() && td.getFullYear() == d.getFullYear();
-	}
+	td = new Date(td);
+	var d = new Date();
+	return td.getDate() == d.getDate() && td.getMonth() == d.getMonth() && td.getFullYear() == d.getFullYear();
 }
 
