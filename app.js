@@ -48,7 +48,7 @@ io.sockets.on("connection", function(client){
  });
 
  client.on('messagesloaded', function(name){
- 	client.emit('userjoined', name);
+ 	io.emit('userjoined', name);
  });
 
  client.on('disconnect', function(data) {
