@@ -63,7 +63,7 @@ function prependOldMessages(messages){
 function prependPrevUsers(names){
 	var virg = "";
     names.forEach(function(name){
-    	$("#usersList").append(virg+name.nickname);
+    	$("#usersList").append(virg+name);
     	virg = ", ";
     }); 
 }

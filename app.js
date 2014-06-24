@@ -40,7 +40,7 @@ io.sockets.on("connection", function(client){
 	    client.emit("prevmessages", messages);
 	  }
 	});
-	db.users.find(function(err, names){
+	db.users.distinct('nickname', function(err, names){
 	  if( !err && names){
 	    client.emit("prevusers", names);
 	  }
